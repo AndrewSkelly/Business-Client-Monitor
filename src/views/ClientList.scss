@@ -5,55 +5,54 @@
     padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;
+    overflow-x: auto; /* To handle overflow if needed */
 }
 
-/* Individual client row container */
+/* Table Header */
+.table-header {
+    display: flex;
+    background-color: #f8f9fa;
+    font-weight: bold;
+    border-bottom: 2px solid #dee2e6;
+    padding: 10px;
+    margin-bottom: 10px; /* Space below the header */
+}
+
+.header-cell {
+    flex: 1;
+    padding: 10px;
+    text-align: left;
+    border-right: 1px solid #dee2e6;
+    color: #343a40; /* Dark grey color for heading text */
+}
+
+.header-cell:last-child {
+    border-right: none;
+}
+
+/* Client Row */
 .client-row {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background-color: white;
-    color: black;
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #dee2e6;
+    padding: 10px;
 }
 
-/* Flex container for client info */
-.client-info {
-    display: flex;
+.client-cell {
     flex: 1;
-    justify-content: space-between;
-    margin-right: 20px; /* Space between info and actions */
+    padding: 10px;
+    text-align: left;
+    color: #343a40; /* Dark grey color for cell text */
 }
 
-/* Client info section styling */
-.client-info h3 {
-    flex: 2;
-    margin: 0;
-    font-size: 18px;
-}
-
-.client-info .email {
-    flex: 3;
-    margin: 0;
-    color: #666;
-    text-align: center;
-}
-
-.client-info .phone {
-    flex: 2;
-    margin: 0;
-    color: #666;
-    text-align: right;
-}
-
-/* Client actions section styling */
-.client-actions {
+.client-cell.client-tags {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
+}
+
+.client-cell.client-actions {
+    display: flex;
+    justify-content: flex-start;
 }
 
 .client-actions button {
@@ -68,18 +67,19 @@
 
 .edit-action {
     background-color: #007bff;
+    &:hover {
+        background-color: #0056b3;
+    }
 }
 
 .delete-action {
-    background-color: #ff003c;
-}
-
-.client-actions button:hover {
-    background-color: #0056b3;
+    background-color: #ff0048;
+    &:hover {
+        background-color: #b10032;
+    }
 }
 
 /* Hover effect for rows */
 .client-row:hover {
     background-color: #e9ecef;
 }
-

@@ -1,47 +1,110 @@
 import React from 'react';
-import './ClientList.scss'
+import './ClientList.scss';
+import Tag from '../components/Tag';
 
 const ClientList: React.FC = () => {
   return (
-    // <div className='clientlog'>
-    //   <h1 className='title'>Client Log Page</h1>
-    //   <p className='text'>name, email, pillnote and edit or delete</p>
-    //   <div className='container'>
-    //     <div>hi</div>
-    //     <div>this</div>
-    //     <div>is</div>
-    //     <div>row</div>
-    //   </div>
-    // </div>
-
     <div className="client-log">
-    <div className="client-row">
-        <div className="client-info">
-            <h3>Lauren Dorrington</h3>
-            <p>Email: lauren457@gmail.com</p>
-            <p>Phone: 085 1387536</p>
-        </div>
-        <div className="client-actions">
-        <button className='edit-action'>Edit</button>
-        <button className='delete-action'>Delete</button>
-        </div>
-    </div>
+      {/* Table Header */}
+      <div className="table-header">
+        <div className="header-cell">Name</div>
+        <div className="header-cell">Email</div>
+        <div className="header-cell">Phone</div>
+        <div className="header-cell">Tags</div>
+        <div className="header-cell">Actions</div>
+      </div>
 
-    <div className="client-row">
-        <div className="client-info">
-            <h3>Andrew Skelly</h3>
-            <p>Email: andrews2001@hotmail.com</p>
-            <p>Phone: 0851372265</p>
+      {/* Client Rows */}
+      <div className="client-row">
+        <div className="client-cell">Lauren Dorrington</div>
+        <div className="client-cell">lauren457@gmail.com</div>
+        <div className="client-cell">085 1387536</div>
+        <div className="client-cell client-tags"><Tag text='Banned' backgroundColor='#ff1736'/></div>
+        <div className="client-cell client-actions">
+          <button className='edit-action'>Edit</button>
+          <button className='delete-action'>Delete</button>
         </div>
-        <div className="client-actions">
-            <button className='edit-action'>Edit</button>
-            <button className='delete-action'>Delete</button>
+      </div>
+
+      <div className="client-row">
+        <div className="client-cell">Andrew Skelly</div>
+        <div className="client-cell">andrews2001@hotmail.com</div>
+        <div className="client-cell">0851372265</div>
+        <div className="client-cell client-tags"><Tag text='Missed Payment' backgroundColor='#bb22dd'/></div>
+        <div className="client-cell client-actions">
+          <button className='edit-action'>Edit</button>
+          <button className='delete-action'>Delete</button>
         </div>
-    </div>
+      </div>
     
-    {/* More client rows */}
+    
+<div className="client-row">
+  <div className="client-cell">Ciara O'Connell</div>
+  <div className="client-cell">ciaraoc22@gmail.com</div>
+  <div className="client-cell">0851329847</div>
+  <div className="client-cell client-tags"><Tag text='New' backgroundColor='#22bbdd'/></div>
+  <div className="client-cell client-actions">
+    <button className='edit-action'>Edit</button>
+    <button className='delete-action'>Delete</button>
+  </div>
 </div>
 
+<div className="client-row">
+  <div className="client-cell">Niall Fitzpatrick</div>
+  <div className="client-cell">niallfitz95@outlook.com</div>
+  <div className="client-cell">0851345896</div>
+  <div className="client-cell client-tags"><Tag text='Friendly' backgroundColor='#22ddbb'/></div>
+  <div className="client-cell client-actions">
+    <button className='edit-action'>Edit</button>
+    <button className='delete-action'>Delete</button>
+  </div>
+</div>
+
+<div className="client-row">
+  <div className="client-cell">Aoife Byrne</div>
+  <div className="client-cell">aoifeb1994@yahoo.com</div>
+  <div className="client-cell">0851375568</div>
+  <div className="client-cell client-tags"><Tag text='Confrontational' backgroundColor='#ff8855'/></div>
+  <div className="client-cell client-actions">
+    <button className='edit-action'>Edit</button>
+    <button className='delete-action'>Delete</button>
+  </div>
+</div>
+
+<div className="client-row">
+  <div className="client-cell">Eoghan McCarthy</div>
+  <div className="client-cell">eoghanmc22@live.com</div>
+  <div className="client-cell">0851336942</div>
+  <div className="client-cell client-tags"><Tag text='Late' backgroundColor='#ffaa22'/></div>
+  <div className="client-cell client-actions">
+    <button className='edit-action'>Edit</button>
+    <button className='delete-action'>Delete</button>
+  </div>
+</div>
+
+<div className="client-row">
+  <div className="client-cell">Sinead Gallagher</div>
+  <div className="client-cell">sinead.gal@gmail.com</div>
+  <div className="client-cell">0851394726</div>
+  <div className="client-cell client-tags"><Tag text='Allergies' backgroundColor='#55aaff'/></div>
+  <div className="client-cell client-actions">
+    <button className='edit-action'>Edit</button>
+    <button className='delete-action'>Delete</button>
+  </div>
+</div>
+
+<div className="client-row">
+  <div className="client-cell">Padraig O'Shea</div>
+  <div className="client-cell">poshea01@hotmail.com</div>
+  <div className="client-cell">0851357729</div>
+  <div className="client-cell client-tags"><Tag text='Special Accommodations' backgroundColor='#22aabb'/></div>
+  <div className="client-cell client-actions">
+    <button className='edit-action'>Edit</button>
+    <button className='delete-action'>Delete</button>
+  </div>
+</div>
+      {/* More client rows */}
+    </div>
   );
 };
 
