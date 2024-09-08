@@ -59,7 +59,7 @@ const ClientList: React.FC = () => {
                         <div className="client-cell">{client.email || 'N/A'}</div>
                         <div className="client-cell">{client.phone || 'N/A'}</div>
                         <div className="client-cell client-tags">
-                            {client.tags ? <Tag text={client.tags} backgroundColor="#22bbdd" /> : 'No Tags'}
+                        {client.tags ? <Tag text={client.tags} /> : 'No Tags'}
                         </div>
                         <div className="client-cell client-actions">
                             <button className="edit-action">View</button>
