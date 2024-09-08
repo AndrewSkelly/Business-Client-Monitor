@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './AddButton.scss';
 
+// clientid is null as postgres will auto increment as this PK is serial
 interface Client {
   clientid?: number;
   name: string | null;
@@ -12,6 +13,7 @@ interface Client {
 
 const AddButton: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
+  // Default state is empty until populated with form values
   const [clientData, setClientData] = useState<Client>({
     name: '',
     email: '',
