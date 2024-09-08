@@ -1,9 +1,9 @@
 import React from 'react';
-import {ClientView} from '../interfaces/Client.tsx'
+import {ClientDetails} from '../interfaces/Client.tsx'
 import './ViewClientModal.scss';
 
 interface ViewClientModalProps {
-  client: ClientView;
+  client: ClientDetails;
   closeModal: () => void;
   deleteClient: (clientId: number) => void;
 }

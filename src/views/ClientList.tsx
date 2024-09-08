@@ -3,14 +3,14 @@ import './ClientList.scss';
 import Tag from '../components/Tag';
 import AddButton from '../components/AddButton';
 import ViewClientModal from '../components/ViewClientModal'; // Import the new modal component
-import {ClientView} from '../interfaces/Client.tsx'
+import {ClientDetails} from '../interfaces/Client.tsx'
 
 
 const ClientList: React.FC = () => {
-  const [clients, setClients] = useState<ClientView[]>([]);
+  const [clients, setClients] = useState<ClientDetails[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedClient, setSelectedClient] = useState<ClientView | null>(null); // State for the selected client
+  const [selectedClient, setSelectedClient] = useState<ClientDetails | null>(null); // State for the selected client
   const [showViewModal, setShowViewModal] = useState(false); // State for modal visibility
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const ClientList: React.FC = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data: ClientView[] = await response.json();
+        const data: ClientDetails[] = await response.json();
         setClients(data);
       } catch (error) {
         setError(error instanceof Error ? error.message : 'Unknown error occurred');
@@ -32,7 +32,7 @@ const ClientList: React.FC = () => {
     fetchClients();
   }, []);
 
-  const handleViewClient = (client: ClientView) => {
+  const handleViewClient = (client: ClientDetails) => {
     setSelectedClient(client);
     setShowViewModal(true); // Show the modal when "View" is clicked
   };

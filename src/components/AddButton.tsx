@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import {ClientAdd} from '../interfaces/Client.tsx'
+import {AddClientDetails} from '../interfaces/Client.tsx'
 import './AddButton.scss';
-
-
 
 const AddButton: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   // Default state is empty until populated with form values
-  const [clientData, setClientData] = useState<ClientAdd>({
+  const [clientData, setClientData] = useState<AddClientDetails>({
     name: '',
     email: '',
     phone: '',
