@@ -20,18 +20,17 @@ Layout V1
 ```diff
 + Add another column for tags with pill buttons of short descriptions about the client
 + Possible Tags (New, Friendly, Confrontational, Late, Missed Payments, Banned, Allergies, Special Accomodations)
++ pass the object as a prop and destructire it for readability
++ map these elements to the table component
++ when a basic backend is created for a get request, perform one using the useEffect hook and update the map with real DB data
++ Create a new database to hold data
 ```
 
 ## To be Completed
 ```
 
-- Create Js objects for each person instead of hard coding
-- pass the object as a prop and destructire it for readability
-- map these elements to the table component
-- when a basic backend is created for a get reauest, perform one using the useEffect hook and update the map with real DB data
 - Add view button to see full notes on the client as a modal with detailed profile
 - create a modal component to to display this data
-- Create a new database to hold data
 - Create C# API to handle this data (Get, Post, Put, Delete)
 - on the analytics page create a new flex container layout like for the clientpage this time with 6 divs inside, each can be their own component
 - in each for now we can display data as text but will be made into pie charts and such
