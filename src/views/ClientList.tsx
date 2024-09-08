@@ -3,21 +3,14 @@ import './ClientList.scss';
 import Tag from '../components/Tag';
 import AddButton from '../components/AddButton';
 import ViewClientModal from '../components/ViewClientModal'; // Import the new modal component
+import {ClientView} from '../interfaces/Client.tsx'
 
-interface Client {
-  clientid: number;
-  name: string | null;
-  email: string | null;
-  phone: string | null;
-  tags: string | null;
-  notes: string | null;
-}
 
 const ClientList: React.FC = () => {
-  const [clients, setClients] = useState<Client[]>([]);
+  const [clients, setClients] = useState<ClientView[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedClient, setSelectedClient] = useState<Client | null>(null); // State for the selected client
+  const [selectedClient, setSelectedClient] = useState<ClientView | null>(null); // State for the selected client
   const [showViewModal, setShowViewModal] = useState(false); // State for modal visibility
 
   useEffect(() => {
@@ -27,7 +20,7 @@ const ClientList: React.FC = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        const data: Client[] = await response.json();
+        const data: ClientView[] = await response.json();
         setClients(data);
       } catch (error) {
         setError(error instanceof Error ? error.message : 'Unknown error occurred');
@@ -39,7 +32,7 @@ const ClientList: React.FC = () => {
     fetchClients();
   }, []);
 
-  const handleViewClient = (client: Client) => {
+  const handleViewClient = (client: ClientView) => {
     setSelectedClient(client);
     setShowViewModal(true); // Show the modal when "View" is clicked
   };

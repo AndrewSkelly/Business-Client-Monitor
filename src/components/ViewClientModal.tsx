@@ -1,17 +1,9 @@
 import React from 'react';
+import {ClientView} from '../interfaces/Client.tsx'
 import './ViewClientModal.scss';
 
-interface Client {
-  clientid: number;
-  name: string | null;
-  email: string | null;
-  phone: string | null;
-  tags: string | null;
-  notes: string | null;
-}
-
 interface ViewClientModalProps {
-  client: Client;
+  client: ClientView;
   closeModal: () => void;
   deleteClient: (clientId: number) => void;
 }
@@ -26,6 +18,10 @@ const ViewClientModal: React.FC<ViewClientModalProps> = ({ client, closeModal, d
       <div className="modal-content">
         <h2>Client Details</h2>
 
+        <div className="client-detail">
+          <strong>Client ID</strong>
+          <p>{client.clientid || 'N/A'}</p>
+        </div>
         <div className="client-detail">
           <strong>Name:</strong>
           <p>{client.name || 'N/A'}</p>
