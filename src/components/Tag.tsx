@@ -20,9 +20,9 @@ interface TagProps {
   textColor?: string;
 }
 
-const Tag: React.FC<TagProps> = ({ text, backgroundColor, textColor = '#ffffff' }) => {
+const Tag: React.FC<TagProps> = ({ text, textColor = '#ffffff' }) => {
   // Determine the background color based on the tag text
-  const color = backgroundColor || tagColors[text] || '#e0e0e0'; // Default to grey if no color is defined
+  const color = tagColors[text] || '#e0e0e0'; // Default to grey if no color is defined
 
   return (
     <span className='Tag' style={{ backgroundColor: color, color: textColor }}>
