@@ -1,4 +1,13 @@
-# Client Log
+# Business-Client-Monitor
+`Created By Andrew Skelly`
+
+## Overview
+
+The **Business-Client-Monitor** is a React app which is used for note taking and analytics on customers in the service industry. This app provides an insight into the list of clients who are customers of a salon. The project is designed to support typical client management operations, with the current focus on retrieving clients' data for analytical analysis.
+
+## Features
+
+Display client data in a table for viewing by the salon staff
 
 Layout V2
 ![image](https://github.com/user-attachments/assets/5d9657db-ceed-49cf-a933-94ea2b0a748a)
@@ -37,3 +46,9 @@ Layout V1
  
 
 ```
+
+## Technologies Used
+
+- **React**: A JavaScript library used for building single-page applications with the use of reusable UI components.
+- **SCSS**: A CSS preprocessor that adds extra features making it easier to maintain and extend styling.
+- **TypeScript**: A strongly typed extension to JavaScript.

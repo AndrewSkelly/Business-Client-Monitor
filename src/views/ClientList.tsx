@@ -1,114 +1,76 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './ClientList.scss';
 import Tag from '../components/Tag';
 import AddButton from '../components/AddButton';
 
+interface Client {
+    clientid: number;
+    name: string | null;
+    email: string | null;
+    phone: string | null;
+    tags: string | null;
+    notes: string | null;
+}
+
 const ClientList: React.FC = () => {
+    const [clients, setClients] = useState<Client[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchClients = async () => {
+            try {
+                const response = await fetch('https://localhost:7053/api/Clients');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data: Client[] = await response.json();
+                setClients(data);
+            } catch (error) {
+                setError(error instanceof Error ? error.message : 'Unknown error occurred');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchClients();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+
     return (
-        <>
-            <div className="client-log">
-                <AddButton />
-                {/* Table Header */}
-                <div className="table-header">
-                    <div className="header-cell">Name</div>
-                    <div className="header-cell">Email</div>
-                    <div className="header-cell">Phone</div>
-                    <div className="header-cell">Tags</div>
-                    <div className="header-cell">Actions</div>
-                </div>
-
-                {/* Client Rows */}
-                <div className="client-row">
-                    <div className="client-cell">Lauren Dorrington</div>
-                    <div className="client-cell">lauren457@gmail.com</div>
-                    <div className="client-cell">085 1387536</div>
-                    <div className="client-cell client-tags"><Tag text='Banned' backgroundColor='#ff1736' /></div>
-                    <div className="client-cell client-actions">
-                        <button className='edit-action'>Edit</button>
-                        <button className='delete-action'>Delete</button>
-                    </div>
-                </div>
-
-                <div className="client-row">
-                    <div className="client-cell">Andrew Skelly</div>
-                    <div className="client-cell">andrews2001@hotmail.com</div>
-                    <div className="client-cell">0851372265</div>
-                    <div className="client-cell client-tags"><Tag text='Missed Payment' backgroundColor='#bb22dd' /></div>
-                    <div className="client-cell client-actions">
-                        <button className='edit-action'>Edit</button>
-                        <button className='delete-action'>Delete</button>
-                    </div>
-                </div>
-
-
-                <div className="client-row">
-                    <div className="client-cell">Hannah Skelly</div>
-                    <div className="client-cell">hannahskelly@gmail.com</div>
-                    <div className="client-cell">0851329847</div>
-                    <div className="client-cell client-tags"><Tag text='New' backgroundColor='#22bbdd' /></div>
-                    <div className="client-cell client-actions">
-                        <button className='edit-action'>Edit</button>
-                        <button className='delete-action'>Delete</button>
-                    </div>
-                </div>
-
-                <div className="client-row">
-                    <div className="client-cell">Niall Fitzpatrick</div>
-                    <div className="client-cell">niallfitz95@outlook.com</div>
-                    <div className="client-cell">0851345896</div>
-                    <div className="client-cell client-tags"><Tag text='Friendly' backgroundColor='#22ddbb' /></div>
-                    <div className="client-cell client-actions">
-                        <button className='edit-action'>Edit</button>
-                        <button className='delete-action'>Delete</button>
-                    </div>
-                </div>
-
-                <div className="client-row">
-                    <div className="client-cell">Aoife Byrne</div>
-                    <div className="client-cell">aoifeb1994@yahoo.com</div>
-                    <div className="client-cell">0851375568</div>
-                    <div className="client-cell client-tags"><Tag text='Confrontational' backgroundColor='#ff8855' /></div>
-                    <div className="client-cell client-actions">
-                        <button className='edit-action'>Edit</button>
-                        <button className='delete-action'>Delete</button>
-                    </div>
-                </div>
-
-                <div className="client-row">
-                    <div className="client-cell">Eoghan McCarthy</div>
-                    <div className="client-cell">eoghanmc22@live.com</div>
-                    <div className="client-cell">0851336942</div>
-                    <div className="client-cell client-tags"><Tag text='Late' backgroundColor='#ffaa22' /></div>
-                    <div className="client-cell client-actions">
-                        <button className='edit-action'>Edit</button>
-                        <button className='delete-action'>Delete</button>
-                    </div>
-                </div>
-
-                <div className="client-row">
-                    <div className="client-cell">Sinead Gallagher</div>
-                    <div className="client-cell">sinead.gal@gmail.com</div>
-                    <div className="client-cell">0851394726</div>
-                    <div className="client-cell client-tags"><Tag text='Allergies' backgroundColor='#55aaff' /></div>
-                    <div className="client-cell client-actions">
-                        <button className='edit-action'>Edit</button>
-                        <button className='delete-action'>Delete</button>
-                    </div>
-                </div>
-
-                <div className="client-row">
-                    <div className="client-cell">Padraig O'Shea</div>
-                    <div className="client-cell">poshea01@hotmail.com</div>
-                    <div className="client-cell">0851357729</div>
-                    <div className="client-cell client-tags"><Tag text='Special Accommodations' backgroundColor='#22aabb' /></div>
-                    <div className="client-cell client-actions">
-                        <button className='edit-action'>Edit</button>
-                        <button className='delete-action'>Delete</button>
-                    </div>
-                </div>
-                {/* More client rows */}
+        <div className="client-log">
+            <AddButton />
+            {/* Table Header */}
+            <div className="table-header">
+                <div className="header-cell">Name</div>
+                <div className="header-cell">Email</div>
+                <div className="header-cell">Phone</div>
+                <div className="header-cell">Tags</div>
+                <div className="header-cell">Actions</div>
             </div>
-        </>
+
+            {/* Render Client Rows */}
+            {clients.length > 0 ? (
+                clients.map(client => (
+                    <div key={client.clientid} className="client-row">
+                        <div className="client-cell">{client.name || 'N/A'}</div>
+                        <div className="client-cell">{client.email || 'N/A'}</div>
+                        <div className="client-cell">{client.phone || 'N/A'}</div>
+                        <div className="client-cell client-tags">
+                            {client.tags ? <Tag text={client.tags} backgroundColor="#22bbdd" /> : 'No Tags'}
+                        </div>
+                        <div className="client-cell client-actions">
+                            <button className="edit-action">View</button>
+                            <button className="delete-action">Delete</button>
+                        </div>
+                    </div>
+                ))
+            ) : (
+                <div>No clients available</div>
+            )}
+        </div>
     );
 };
 
