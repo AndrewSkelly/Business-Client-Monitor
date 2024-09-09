@@ -9,6 +9,11 @@ The **Business-Client-Monitor** is a React app which is used for note taking and
 
 Display client data in a table for viewing by the salon staff
 
+Layout V3
+Shown below is the addition of clients to the client table, viewing specific clients and deleting them from the postgres client table.
+https://github.com/user-attachments/assets/e5e9f6de-a6a8-48a6-a2e9-d46dd77e2e33
+
+
 Layout V2
 ![image](https://github.com/user-attachments/assets/5d9657db-ceed-49cf-a933-94ea2b0a748a)
 
