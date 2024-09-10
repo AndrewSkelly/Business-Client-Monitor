@@ -1,0 +1,45 @@
+// Here I will make a button an extend it using the below sample syntax
+
+// .button {
+//     padding: 10px 20px;
+//     border: none;
+//     border-radius: 5px;
+//   }
+  
+//   .primary-button {
+//     @extend .button;
+//     background-color: blue;
+//     color: white;
+//   }
+  
+
+
+
+// .button {
+
+// }
+// .close-button,
+// .delete-button {
+//   background-color: #1aae3a;
+//   color: white;
+//   border: none;
+//   padding: 12px 20px;
+//   border-radius: 8px;
+//   cursor: pointer;
+//   font-size: 16px;
+//   font-weight: bold;
+//   transition: background-color 0.3s ease;
+//   margin-left: 10px;
+// }
+
+// .close-button:hover {
+//   background-color: #60c676;
+// }
+
+// .delete-button {
+//   background-color: #e74c3c;
+// }
+
+// .delete-button:hover {
+//   background-color: #c0392b;
+// }

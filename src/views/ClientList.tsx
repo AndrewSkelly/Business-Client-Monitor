@@ -1,65 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './ClientList.scss';
 import Tag from '../components/Tag';
 import AddButton from '../components/AddButton';
-import ViewClientModal from '../components/ViewClientModal'; // Import the new modal component
-import {ClientDetails} from '../interfaces/Client.tsx'
-
+import ViewClientModal from '../components/ViewClientModal';
+import { ClientDetails } from '../interfaces/Client';
+import { useFetchClients } from '../hooks/useFetchClient'; // Hook for fetching clients
+import { useDeleteClient } from '../hooks/useDeleteClient'; // Hook for deleting clients
 
 const ClientList: React.FC = () => {
-  const [clients, setClients] = useState<ClientDetails[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [selectedClient, setSelectedClient] = useState<ClientDetails | null>(null); // State for the selected client
-  const [showViewModal, setShowViewModal] = useState(false); // State for modal visibility
-
-  useEffect(() => {
-    const fetchClients = async () => {
-      try {
-        const response = await fetch('https://localhost:7053/api/Clients');
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data: ClientDetails[] = await response.json();
-        setClients(data);
-      } catch (error) {
-        setError(error instanceof Error ? error.message : 'Unknown error occurred');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchClients();
-  }, []);
+  const { clients, setClients, loading, error, refreshClients } = useFetchClients(); // Now includes refreshClients
+  const { deleteClient, loading: deleteLoading, error: deleteError } = useDeleteClient(); // Use the delete hook
+  const [selectedClient, setSelectedClient] = useState<ClientDetails | null>(null);
+  const [showViewModal, setShowViewModal] = useState(false);
 
   const handleViewClient = (client: ClientDetails) => {
     setSelectedClient(client);
-    setShowViewModal(true); // Show the modal when "View" is clicked
+    setShowViewModal(true);
   };
 
   const closeModal = () => {
     setSelectedClient(null);
-    setShowViewModal(false); // Hide the modal when closed
+    setShowViewModal(false);
   };
 
   const handleDeleteClient = async (clientId: number) => {
-    try {
-      const response = await fetch(`https://localhost:7053/api/Clients/${clientId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (response.ok) {
-        // Update the clients state by filtering out the deleted client
-        setClients(clients.filter(client => client.clientid !== clientId));
-        closeModal(); // Close the modal after deletion
-      } else {
-        console.error('Failed to delete client.');
-      }
-    } catch (error) {
-      console.error('Error deleting client:', error);
+    const success = await deleteClient(clientId); // Call the deleteClient hook
+    if (success) {
+      setClients(clients.filter(client => client.clientid !== clientId)); // Update clients after deletion
+      closeModal(); // Close the modal after successful deletion
     }
   };
 
@@ -68,7 +36,8 @@ const ClientList: React.FC = () => {
 
   return (
     <div className="client-log">
-      <AddButton />
+      {/* Pass refreshClients to AddButton */}
+      <AddButton refreshClients={refreshClients} />
       <div className="table-header">
         <div className="header-cell">Name</div>
         <div className="header-cell">Email</div>
@@ -95,14 +64,16 @@ const ClientList: React.FC = () => {
         <div>No clients available</div>
       )}
 
-      {/* View Client Modal */}
       {showViewModal && selectedClient && (
         <ViewClientModal 
           client={selectedClient} 
           closeModal={closeModal} 
-          deleteClient={handleDeleteClient} // Pass the delete client function
+          deleteClient={handleDeleteClient}
         />
       )}
+
+      {deleteLoading && <div>Deleting client...</div>}
+      {deleteError && <div>Error: {deleteError}</div>}
     </div>
   );
 };

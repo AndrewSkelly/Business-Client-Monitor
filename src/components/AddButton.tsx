@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import {AddClientDetails} from '../interfaces/Client.tsx'
+import { AddClientDetails } from '../interfaces/Client';
 import './AddButton.scss';
 
-const AddButton: React.FC = () => {
+interface AddButtonProps {
+  refreshClients: () => void; // Add this prop to trigger re-fetching clients
+}
+
+const AddButton: React.FC<AddButtonProps> = ({ refreshClients }) => {
   const [showModal, setShowModal] = useState(false);
   // Default state is empty until populated with form values
   const [clientData, setClientData] = useState<AddClientDetails>({
@@ -55,6 +59,10 @@ const AddButton: React.FC = () => {
 
       // Close the modal after successful submission
       toggleModal();
+
+      // Trigger the re-fetching of clients
+      refreshClients();
+
     } catch (error) {
       console.error('Failed to submit client data:', error);
     }
@@ -105,7 +113,7 @@ const AddButton: React.FC = () => {
 
               <label htmlFor="tags">Tags</label>
               <input
-              placeholder='New'
+                placeholder='New'
                 type="text"
                 name="tags"
                 id="tags"
@@ -115,7 +123,7 @@ const AddButton: React.FC = () => {
 
               <label htmlFor="notes">Notes</label>
               <textarea
-              placeholder='Customer has known allergies to Hair Dye'
+                placeholder='Customer has known allergies to Hair Dye'
                 name="notes"
                 id="notes"
                 value={clientData.notes || ''}
