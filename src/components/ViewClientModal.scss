@@ -57,8 +57,9 @@
   }
   
   .close-button,
-  .delete-button {
-    background-color: #1aae3a;
+  .delete-button,
+  .edit-button {
+    background-color: #e74c3c;
     color: white;
     border: none;
     padding: 12px 20px;
@@ -71,7 +72,7 @@
   }
   
   .close-button:hover {
-    background-color: #60c676;
+    background-color: #c0392b;
   }
   
   .delete-button {
@@ -80,6 +81,14 @@
   
   .delete-button:hover {
     background-color: #c0392b;
+  }
+
+  .edit-button {
+    background-color: #9600ff;
+  }
+  
+  .edit-button:hover {
+    background-color: #7a00d2;
   }
   
   

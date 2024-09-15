@@ -15,6 +15,9 @@ const Navbar: React.FC = () => {
             <Link to="/client-log" className="nav-link">Client List</Link>
           </li>
           <li className="nav-item">
+            <Link to="/service-history" className="nav-link">Service History</Link>
+          </li>
+          <li className="nav-item">
             <Link to="/analytics" className="nav-link">Analytics</Link>
           </li>
         </ul>

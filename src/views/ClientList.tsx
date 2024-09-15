@@ -13,16 +13,19 @@ const ClientList: React.FC = () => {
   const [selectedClient, setSelectedClient] = useState<ClientDetails | null>(null);
   const [showViewModal, setShowViewModal] = useState(false);
 
+  // Open the view/edit modal with selected client
   const handleViewClient = (client: ClientDetails) => {
     setSelectedClient(client);
     setShowViewModal(true);
   };
 
+  // Close modal and reset state
   const closeModal = () => {
     setSelectedClient(null);
     setShowViewModal(false);
   };
 
+  // Handle deleting a client
   const handleDeleteClient = async (clientId: number) => {
     const success = await deleteClient(clientId); // Call the deleteClient hook
     if (success) {
@@ -31,6 +34,14 @@ const ClientList: React.FC = () => {
     }
   };
 
+  // Handle updating a client
+  const handleUpdateClient = (clientId: number, updatedClient: ClientDetails) => {
+    // Update the client in the state after successful update
+    setClients(clients.map(client => (client.clientid === clientId ? updatedClient : client)));
+    closeModal(); // Close the modal after updating the client
+  };
+
+  // Render loading or error states
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -46,6 +57,7 @@ const ClientList: React.FC = () => {
         <div className="header-cell">Actions</div>
       </div>
 
+      {/* Render the list of clients */}
       {clients.length > 0 ? (
         clients.map(client => (
           <div key={client.clientid} className="client-row">
@@ -64,11 +76,13 @@ const ClientList: React.FC = () => {
         <div>No clients available</div>
       )}
 
+      {/* Conditionally render the modal if a client is selected */}
       {showViewModal && selectedClient && (
         <ViewClientModal 
-          client={selectedClient} 
-          closeModal={closeModal} 
+          client={selectedClient}
+          closeModal={closeModal}
           deleteClient={handleDeleteClient}
+          updateClient={handleUpdateClient} // Pass the update client handler
         />
       )}
 

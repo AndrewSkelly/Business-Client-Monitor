@@ -1,0 +1,48 @@
+/* src/components/ServiceHistory.scss */
+.service-history {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+.table-header {
+    display: flex;
+    background-color: #f8f9fa;
+    font-weight: bold;
+    border-bottom: 2px solid #dee2e6;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.header-cell {
+    flex: 1;
+    padding: 10px;
+    text-align: left;
+    border-right: 1px solid #dee2e6;
+    color: #343a40;
+}
+
+.header-cell:last-child {
+    border-right: none;
+}
+
+.service-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #dee2e6;
+    padding: 10px;
+}
+
+.service-cell {
+    flex: 1;
+    padding: 10px;
+    text-align: left;
+    color: #343a40;
+}
+
+.service-row:hover {
+    background-color: #e9ecef;
+}

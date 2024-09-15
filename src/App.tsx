@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './views/Home';
 import ClientList from './views/ClientList';
+import ServiceHistory from './views/ServiceHistory';
 import Analytics from './views/Analytics';
 import './App.scss'
 // import Container from './components/Container';
@@ -15,6 +16,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/client-log" element={<ClientList />} />
+        <Route path="/service-history" element={<ServiceHistory />} />
         <Route path="/analytics" element={<Analytics />} />
       </Routes>
     </Router>
