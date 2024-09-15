@@ -42,8 +42,8 @@ const ClientList: React.FC = () => {
   };
 
   // Render loading or error states
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <div className='card-loading'><h1 className='card-title'>Loading...</h1></div>;
+  if (error) return <div className='card-error'><h1 className='card-title'>Error: {error}</h1></div>;
 
   return (
     <div className="client-log">
