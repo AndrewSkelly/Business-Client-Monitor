@@ -1,7 +1,7 @@
 // src/components/ServiceHistory.tsx
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './ServiceHistory.scss';
-import { ServiceHistoryDetails } from '../interfaces/ServiceHistory';
+// import { ServiceHistoryDetails } from '../interfaces/ServiceHistory';
 import { useFetchServiceHistory } from '../hooks/useFetchServiceHistory'; // Hook for fetching service history
 
 const ServiceHistory: React.FC = () => {

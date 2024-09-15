@@ -10,48 +10,43 @@ interface ViewClientModalProps {
 }
 
 const ViewClientModal: React.FC<ViewClientModalProps> = ({ client, closeModal, deleteClient, updateClient }) => {
-  const [isEditing, setIsEditing] = useState(false); // Track if we're in edit mode
-  const [editedClient, setEditedClient] = useState<ClientDetails>(client); // Store the editable client details
-  const [isLoading, setIsLoading] = useState(false); // Track loading state
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedClient, setEditedClient] = useState<ClientDetails>(client);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Handle input changes in the form
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setEditedClient(prevClient => ({
+    setEditedClient((prevClient: ClientDetails) => ({
       ...prevClient,
       [name]: value,
     }));
   };
+  
 
-  // Handle Save (PUT request)
   const handleSave = async () => {
-    setIsLoading(true); // Set loading state while saving
+    setIsLoading(true);
     try {
       const response = await fetch(`https://localhost:7053/api/Clients/${editedClient.clientid}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(editedClient), // Send the updated client details
+        body: JSON.stringify(editedClient),
       });
 
       if (!response.ok) {
         throw new Error(`Failed to update client: ${response.statusText}`);
       }
 
-      // Update client in parent component
       updateClient(editedClient.clientid, editedClient);
-
-      // Close the modal after saving
       closeModal();
     } catch (error) {
       console.error('Error updating client:', error);
     } finally {
-      setIsLoading(false); // Reset loading state
+      setIsLoading(false);
     }
   };
 
-  // Handle delete client
   const handleDelete = () => {
     deleteClient(client.clientid);
   };
@@ -61,35 +56,79 @@ const ViewClientModal: React.FC<ViewClientModalProps> = ({ client, closeModal, d
       <div className="modal-content">
         <h2>{isEditing ? 'Edit Client Details' : 'Client Details'}</h2>
 
-        {!isEditing ? (
-          <>
-            {/* View Mode */}
-            <div className="client-detail">
-              <strong>Client ID:</strong>
-              <p>{client.clientid}</p>
-            </div>
-            <div className="client-detail">
-              <strong>Name:</strong>
+        <div className="client-detail">
+          <div className="detail-item">
+            <strong>Client ID:</strong>
+            <p>{client.clientid}</p>
+          </div>
+          <div className="detail-item">
+            <strong>Name:</strong>
+            {isEditing ? (
+              <input
+                type="text"
+                name="name"
+                value={editedClient.name || ''}
+                onChange={handleInputChange}
+              />
+            ) : (
               <p>{client.name || 'N/A'}</p>
-            </div>
-            <div className="client-detail">
-              <strong>Email:</strong>
+            )}
+          </div>
+          <div className="detail-item">
+            <strong>Email:</strong>
+            {isEditing ? (
+              <input
+                type="email"
+                name="email"
+                value={editedClient.email || ''}
+                onChange={handleInputChange}
+              />
+            ) : (
               <p>{client.email || 'N/A'}</p>
-            </div>
-            <div className="client-detail">
-              <strong>Phone:</strong>
+            )}
+          </div>
+          <div className="detail-item">
+            <strong>Phone:</strong>
+            {isEditing ? (
+              <input
+                type="tel"
+                name="phone"
+                value={editedClient.phone || ''}
+                onChange={handleInputChange}
+              />
+            ) : (
               <p>{client.phone || 'N/A'}</p>
-            </div>
-            <div className="client-detail">
-              <strong>Tags:</strong>
+            )}
+          </div>
+          <div className="detail-item">
+            <strong>Tags:</strong>
+            {isEditing ? (
+              <input
+                name="tags"
+                value={editedClient.tags || ''}
+                onChange={handleInputChange}
+              />
+            ) : (
               <p>{client.tags || 'N/A'}</p>
-            </div>
-            <div className="client-detail">
-              <strong>Notes:</strong>
+            )}
+          </div>
+          <div className="detail-item">
+            <strong>Notes:</strong>
+            {isEditing ? (
+              <input
+                name="notes"
+                value={editedClient.notes || ''}
+                onChange={handleInputChange}
+              />
+            ) : (
               <p>{client.notes || 'N/A'}</p>
-            </div>
+            )}
+          </div>
+        </div>
 
-            <div className="modal-actions">
+        <div className="modal-actions">
+          {!isEditing ? (
+            <>
               <button className="edit-button" onClick={() => setIsEditing(true)}>
                 Edit
               </button>
@@ -99,70 +138,18 @@ const ViewClientModal: React.FC<ViewClientModalProps> = ({ client, closeModal, d
               <button className="close-button" onClick={closeModal}>
                 X
               </button>
-            </div>
-          </>
-        ) : (
-          <>
-            {/* Edit Mode */}
-            <div className="client-detail">
-              <strong>Client ID:</strong>
-              <p>{editedClient.clientid}</p>
-            </div>
-            <div className="client-detail">
-              <label>Name:</label>
-              <input
-                type="text"
-                name="name"
-                value={editedClient.name ?? ''}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="client-detail">
-              <label>Email:</label>
-              <input
-                type="email"
-                name="email"
-                value={editedClient.email ?? ''}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="client-detail">
-              <label>Phone:</label>
-              <input
-                type="text"
-                name="phone"
-                value={editedClient.phone ?? ''}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="client-detail">
-              <label>Tags:</label>
-              <input
-                type="text"
-                name="tags"
-                value={editedClient.tags ?? ''}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="client-detail">
-              <label>Notes:</label>
-              <textarea
-                name="notes"
-                value={editedClient.notes ?? ''}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            <div className="modal-actions">
+            </>
+          ) : (
+            <>
               <button className="save-button" onClick={handleSave} disabled={isLoading}>
                 {isLoading ? 'Saving...' : 'Save'}
               </button>
               <button className="cancel-button" onClick={() => setIsEditing(false)}>
                 Cancel
               </button>
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

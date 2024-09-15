@@ -25,11 +25,12 @@ const AddButton: React.FC<AddButtonProps> = ({ refreshClients }) => {
   // Handle form input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setClientData(prevData => ({
+    setClientData((prevData: AddClientDetails) => ({
       ...prevData,
       [name]: value
     }));
   };
+  
 
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
