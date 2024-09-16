@@ -9,7 +9,8 @@ export const useFetchClients = () => {
   // Function to fetch clients, now reusable
   const fetchClients = async () => {
     try {
-      const response = await fetch('https://localhost:7053/api/Clients');
+      // https://localhost:7053/api/Clients
+      const response = await fetch('https://business-client-monitor-api-e6d3axb9bzhwbhef.ukwest-01.azurewebsites.net/api/Clients');
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }

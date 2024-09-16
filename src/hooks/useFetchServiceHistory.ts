@@ -10,7 +10,8 @@ export const useFetchServiceHistory = () => {
   useEffect(() => {
     const fetchServiceHistory = async () => {
       try {
-        const response = await fetch('https://localhost:7053/api/ServiceDetails');
+        // https://localhost:7053/api/ServiceDetails
+        const response = await fetch('https://business-client-monitor-api-e6d3axb9bzhwbhef.ukwest-01.azurewebsites.net/api/ServiceDetails');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }

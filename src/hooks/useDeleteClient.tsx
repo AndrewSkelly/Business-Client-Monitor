@@ -9,7 +9,8 @@ export const useDeleteClient = () => {
     setError(null);
 
     try {
-      const response = await fetch(`https://localhost:7053/api/Clients/${clientId}`, {
+      // https://localhost:7053/api/Clients/${clientId}
+      const response = await fetch(`https://business-client-monitor-api-e6d3axb9bzhwbhef.ukwest-01.azurewebsites.net/api/Clients/${clientId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

@@ -37,7 +37,8 @@ const AddButton: React.FC<AddButtonProps> = ({ refreshClients }) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://localhost:7053/api/Clients', {
+      // https://localhost:7053/api/Clients
+      const response = await fetch('https://business-client-monitor-api-e6d3axb9bzhwbhef.ukwest-01.azurewebsites.net/api/Clients', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

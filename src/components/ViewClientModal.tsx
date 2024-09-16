@@ -26,7 +26,8 @@ const ViewClientModal: React.FC<ViewClientModalProps> = ({ client, closeModal, d
   const handleSave = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`https://localhost:7053/api/Clients/${editedClient.clientid}`, {
+      // https://localhost:7053/api/Clients/${editedClient.clientid} 
+      const response = await fetch(`https://business-client-monitor-api-e6d3axb9bzhwbhef.ukwest-01.azurewebsites.net/api/Clients/${editedClient.clientid} `, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
