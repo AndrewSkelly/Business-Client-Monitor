@@ -25,7 +25,7 @@ const ServiceHistory: React.FC = () => {
             <div className="service-cell">{record.clientid}</div>
             <div className="service-cell">{record.staffid}</div>
             <div className="service-cell">{record.servicetype}</div>
-            <div className="service-cell">{new Date(record.servicedate).toLocaleString()}</div>
+            <div className="service-cell"><span className='service-date'>{new Date(record.servicedate).toLocaleString()}</span></div>
           </div>
         ))
       ) : (

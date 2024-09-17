@@ -46,3 +46,14 @@
 .service-row:hover {
     background-color: #e9ecef;
 }
+
+.service-date {
+    color: #ffffff;
+    background-color: #343a40;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    &:hover {
+        background-color: #3e5671;
+    }
+}
