@@ -3,69 +3,228 @@
     src: url('../assets/fonts/Rubik-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-  }
+}
 
-  @font-face {
+@font-face {
     font-family: 'RubikBold';
     src: url('../assets/fonts/Rubik-SemiBold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-  }
+}
+/* Mobile View */
+@media only screen and (max-width: 767px) {
 
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 210px; /* Set the width of the navbar */
-    height: 100vh; /* Full height of the viewport */
-    background-color: rgb(36, 38, 42);
-    padding: 20px;
+    /* Hamburger Icon Styles */
+    .hamburger {
+        position: fixed;
+        top: 3%;
+        left: 5%;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 20px;
+        cursor: pointer;
+    }
+
+    .hamburger .bar {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background-color: #000000;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+    }
+
+    /* Navbar Container fixed to top and size determined by view height and width */
+    .navbar {
+        position: fixed;
+        margin: 0;
+        padding-top: 0;
+        padding-top: env(safe-area-inset-top); /* Respect iPhone's notch */
+        padding-left: 0;
+        padding-left: env(safe-area-inset-left);
+        padding-right: 0;
+        padding-right: env(safe-area-inset-right);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #24262a;
+        z-index: 999;
+    }
+
+    /* Navbar list width fills the container and fits inside, each object inside navlist will display column */
+    .nav-list {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .nav-close {
+        position: absolute;
+        top: 5%;
+        right: 5%;
+        list-style: none;
+        cursor: pointer;
+        font-size: 24px;
+        color: #ffffff;
+    }
+
+    .nav-item {
+        padding: 5%;
+        color: #ffffff;
+        font-size: 20px;
+        font-family: 'RubikBold', sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .nav-item:hover::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 5px;
+        background: linear-gradient(90deg, #bf65ff, #9600ff);
+        animation: gradient-animation 3s infinite;
+        transition: background 0.5s ease;
+    }
+
+    .nav-link {
+        color: #ffffff;
+        text-decoration: none;
+        list-style: none;
+        transition: color 0.3s ease;
+    }
+
+    .nav-item:hover {
+        background-color: #313640;
+    }
+
+    .nav-logo img {
+        padding: 5%;
+        width: 8em;
+        object-fit: cover;
+    }
 }
 
-.nav-list{
-    width: 100%;
-    padding: 0;
-    margin: 0;
-}
+@media only screen and (min-width: 768px) {
 
+    /* Desktop View */
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 210px;
+        /* Set the width of the navbar */
+        height: 100vh;
+        /* Full height of the viewport */
+        background-color: #24262a;
+    }
 
-.nav-logo {
-    text-decoration: none;
-    list-style: none;
-    margin-top: 5%;
-    padding-top: 2.5%;
-    padding-bottom: 2.5%;
-    padding-left: 2.5%;
-    display: flex;
-    flex-direction: column;  // Ensure nav items stack vertically
-    border-radius: 25px;
-    text-align: center;
-}
+    .nav-close{
+        display: none;
+    }
 
-.nav-item {
-    font-size: 20px;
-    font-family: 'RubikBold', sans-serif; 
-    text-decoration: none;
-    background-color: rgb(54, 57, 64);
-    list-style: none;
-    margin-top: 5%;
-    padding-top: 2.5%;
-    padding-bottom: 2.5%;
-    padding-left: 2.5%;
-    display: flex;
-    flex-direction: column;  // Ensure nav items stack vertically
-    border-radius: 25px;
-    text-align: center;
-}
+    .nav-list {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
 
-.nav-link{
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-    &:hover {
-        color: #ffffff;          // Optional: Change color on hover
-      }
-}
+    .nav-logo {
+        text-decoration: none;
+        list-style: none;
+        margin-top: 5%;
+        padding-top: 2.5%;
+        padding-bottom: 2.5%;
+        padding-left: 2.5%;
+        display: flex;
+        flex-direction: column;
+        /* Ensure nav items stack vertically */
+        border-radius: 25px;
+    }
 
-.nav-item:hover{
-    background-color: #9600ff;
+    .nav-logo img {
+        padding: 5%;
+    }
+
+    .nav-item {
+        font-size: 20px;
+        font-family: 'RubikBold', sans-serif;
+        text-decoration: none;
+        list-style: none;
+        margin-top: 5%;
+        padding-top: 2.5%;
+        padding-bottom: 2.5%;
+        padding-left: 2.5%;
+        display: flex;
+        flex-direction: column;
+        /* Ensure nav items stack vertically */
+        border-radius: 2px;
+        /* Updated border-radius */
+        text-align: center;
+        position: relative;
+        /* Position for the pseudo-element */
+        overflow: hidden;
+        /* Prevent overflow when the gradient appears */
+    }
+
+    .nav-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 5px;
+        /* Width of the gradient border */
+        background: linear-gradient(180deg, #bf65ff, #9600ff);
+        animation: gradient-animation 3s infinite;
+        transition: background 0.5s ease;
+    }
+
+    @keyframes gradient-animation {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .nav-link {
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        transition: color 0.3s ease;
+        /* Smooth transition on hover */
+    }
+
+    .nav-link:hover {
+        color: #ffffff;
+    }
+
+    .nav-item:hover {
+        background-color: #313640;
+    }
+
+    .nav-item:hover::before {
+        background: linear-gradient(180deg, #bf65ff, #9600ff);
+    }
+
+    /* Optional: Add hover effect on the border */
+    .nav-item:hover::before {
+        width: 8px;
+        /* Slightly expand the left border on hover */
+    }
+
 }
