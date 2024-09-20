@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.scss';
 import Logo from '../assets/icons/ClientLogLogo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCalendarDays, faChartSimple, faHouse, faUsers } from '@fortawesome/free-solid-svg-icons'
 
 const Navbar: React.FC = () => {
   // State to control whether the navbar is open or closed
@@ -71,7 +73,7 @@ const Navbar: React.FC = () => {
         </nav>
       )}
 
-            {/* Navbar that appears when isOpen is true or it's not mobile */}
+      {/* Navbar that appears when isOpen is true or it's not mobile */}
       {(isOpen || !isMobile) && (
         <nav className="navbar">
           <ul className="nav-list">
@@ -85,16 +87,16 @@ const Navbar: React.FC = () => {
               </li>
             )}
             <li className="nav-item" onClick={toggleNavbar}>
-              <Link to="/" className="nav-link">Home</Link>
+              <Link to="/" className="nav-link"><FontAwesomeIcon className='nav-icon' icon={faHouse} />Home</Link>
             </li>
             <li className="nav-item" onClick={toggleNavbar}>
-              <Link to="/client-log" className="nav-link">Client List</Link>
+              <Link to="/client-log" className="nav-link"><FontAwesomeIcon className='nav-icon' icon={faUsers} />Client List</Link>
             </li>
             <li className="nav-item" onClick={toggleNavbar}>
-              <Link to="/service-history" className="nav-link">Service History</Link>
+              <Link to="/service-history" className="nav-link"><FontAwesomeIcon className='nav-icon' icon={faCalendarDays} />Service History</Link>
             </li>
             <li className="nav-item" onClick={toggleNavbar}>
-              <Link to="/analytics" className="nav-link">Analytics</Link>
+              <Link to="/analytics" className="nav-link"><FontAwesomeIcon className='nav-icon' icon={faChartSimple} />Analytics</Link>
             </li>
           </ul>
         </nav>

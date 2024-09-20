@@ -11,6 +11,7 @@
     font-weight: normal;
     font-style: normal;
 }
+
 /* Mobile View */
 @media only screen and (max-width: 767px) {
 
@@ -42,7 +43,8 @@
         position: fixed;
         margin: 0;
         padding-top: 0;
-        padding-top: env(safe-area-inset-top); /* Respect iPhone's notch */
+        padding-top: env(safe-area-inset-top);
+        /* Respect iPhone's notch */
         padding-left: 0;
         padding-left: env(safe-area-inset-left);
         padding-right: 0;
@@ -50,9 +52,16 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 100vh;
         background-color: #24262a;
         z-index: 999;
+    }
+
+    .nav-icon {
+        padding-right: 5%;
+        width: 1.25rem;
+        height: 1.25rem;
+        color: #909090;
     }
 
     /* Navbar list width fills the container and fits inside, each object inside navlist will display column */
@@ -106,6 +115,12 @@
         background-color: #313640;
     }
 
+    /* Targets nav-icon styles through nav-link */
+    .nav-link:hover .nav-icon {
+        color: #9500ff;
+        /* Change icon color on hover */
+    }
+
     .nav-logo img {
         padding: 5%;
         width: 8em;
@@ -120,15 +135,22 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 210px;
+        width: 15%;
         /* Set the width of the navbar */
         height: 100vh;
         /* Full height of the viewport */
-        background-color: #24262a;
+        background-color: #1c1d1f;
     }
 
-    .nav-close{
+    .nav-close {
         display: none;
+    }
+
+    .nav-icon {
+        padding-right: 5%;
+        width: 1.25rem;
+        height: 1.25rem;
+        color: #909090;
     }
 
     .nav-list {
@@ -162,28 +184,27 @@
         margin-top: 5%;
         padding-top: 2.5%;
         padding-bottom: 2.5%;
-        padding-left: 2.5%;
+        padding-left: 10%;
         display: flex;
         flex-direction: column;
         /* Ensure nav items stack vertically */
         border-radius: 2px;
         /* Updated border-radius */
-        text-align: center;
+        text-align: left;
         position: relative;
         /* Position for the pseudo-element */
         overflow: hidden;
         /* Prevent overflow when the gradient appears */
     }
 
-    .nav-item::before {
+    .nav-item:hover::before {
         content: "";
         position: absolute;
         top: 0;
-        right: 0;
+        left: 0;
         height: 100%;
         width: 5px;
-        /* Width of the gradient border */
-        background: linear-gradient(180deg, #bf65ff, #9600ff);
+        background: linear-gradient(90deg, #bf65ff, #9600ff);
         animation: gradient-animation 3s infinite;
         transition: background 0.5s ease;
     }
@@ -211,6 +232,12 @@
 
     .nav-link:hover {
         color: #ffffff;
+    }
+
+    /* Targets nav-icon styles through nav-link */
+    .nav-link:hover .nav-icon {
+        color: #9500ff;
+        /* Change icon color on hover */
     }
 
     .nav-item:hover {
