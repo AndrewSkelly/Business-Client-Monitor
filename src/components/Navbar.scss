@@ -12,9 +12,10 @@
     font-style: normal;
 }
 
+$primary-color: #9600ff;
+
 /* Mobile View */
 @media only screen and (max-width: 767px) {
-
     /* Hamburger Icon Styles */
     .hamburger {
         position: absolute;
@@ -99,7 +100,7 @@
         left: 0;
         height: 100%;
         width: 5px;
-        background: linear-gradient(90deg, #bf65ff, #9600ff);
+        background: linear-gradient(90deg, #bf65ff, $primary-color);
         animation: gradient-animation 3s infinite;
         transition: background 0.5s ease;
     }
@@ -117,7 +118,7 @@
 
     /* Targets nav-icon styles through nav-link */
     .nav-link:hover .nav-icon {
-        color: #9500ff;
+        color: $primary-color;
         /* Change icon color on hover */
     }
 
@@ -203,8 +204,8 @@
         top: 0;
         left: 0;
         height: 100%;
-        width: 5px;
-        background: linear-gradient(90deg, #bf65ff, #9600ff);
+        width: 20px;
+        background: linear-gradient(90deg, #bf65ff, $primary-color);
         animation: gradient-animation 3s infinite;
         transition: background 0.5s ease;
     }
@@ -245,12 +246,12 @@
     }
 
     .nav-item:hover::before {
-        background: linear-gradient(180deg, #bf65ff, #9600ff);
+        background: linear-gradient(180deg, #bf65ff, $primary-color);
     }
 
     /* Optional: Add hover effect on the border */
     .nav-item:hover::before {
-        width: 8px;
+        width: 2%;
         /* Slightly expand the left border on hover */
     }
 

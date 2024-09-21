@@ -1,11 +1,44 @@
-.items {
-    background-color: #534b5e;
-}
-
-.title {
-    color: #000;
-}
-
-.text {
-    color: #000;
-}
+.clientlog {
+    padding: 20px;
+  
+    .title {
+      font-size: 2em;
+      margin-bottom: 20px;
+      color: #000; /* Updated color */
+    }
+  
+    .text {
+      margin-bottom: 20px;
+      font-size: 1.2em;
+      color: #000; /* Updated color */
+    }
+  
+    .chart-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+  
+      /* Style for each chart container */
+      .chart-container {
+        flex: 1;
+        margin: 0 10px; /* Space between charts */
+        padding: 10px;
+        background-color: #534b5e;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  
+        /* Ensure the canvas element takes up full space */
+        canvas {
+          width: 100%;
+          height: 300px; /* Set a fixed height for the canvas */
+        }
+      }
+    }
+  
+    /* Handle the second row which has only two charts */
+    .chart-row:nth-child(2) .chart-container {
+      flex-basis: 100%; /* Each chart takes up 45% width */
+    }
+  }
+  
