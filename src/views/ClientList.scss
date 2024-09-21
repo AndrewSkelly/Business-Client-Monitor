@@ -191,6 +191,42 @@
             opacity: 1;
         }
     }
+
+    /* Tag Filter */
+    .tag-filter {
+        margin-bottom: 20px; /* Space below the filter */
+    }
+
+    .tag-filter label {
+        font-weight: bold;
+        color: #343a40; /* Dark grey color for label text */
+    }
+
+    .tag-filter select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        background-color: #ffffff;
+        color: #343a40;
+        cursor: pointer;
+        margin-top: 5px; /* Space between label and select */
+    }
+
+    .tag-filter select:focus {
+        outline: none;
+        border-color: #9600ff; /* Highlight color on focus */
+    }
+
+    .checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+
+  label {
+    margin-right: 15px;
+  }
+}
+
 }
 
 /* Desktop View */
@@ -379,4 +415,36 @@
             opacity: 1;
         }
     }
+
+    .tag-filter {
+        margin: 1rem 0;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #cecece;
+        color: #24262a;
+      
+        label {
+          font-weight: bold;
+          margin-bottom: 0.5rem;
+        }
+      
+        .checkbox-group {
+          display: flex;
+          flex-direction: column;
+      
+          label {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+      
+            input {
+              margin-right: 0.5rem;
+              accent-color: #2ecc71; // Change checkbox color
+            }
+          }
+        }
+      }
+      
+      
 }

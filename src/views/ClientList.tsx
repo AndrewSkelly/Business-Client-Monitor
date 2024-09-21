@@ -7,9 +7,22 @@ import { ClientDetails } from '../interfaces/Client';
 import { useFetchClients } from '../hooks/useFetchClient'; // Hook for fetching clients
 import { useDeleteClient } from '../hooks/useDeleteClient'; // Hook for deleting clients
 
+// Define your available tags
+const availableTags = [
+  'New Customer',
+  'Missed Payment',
+  'Late',
+  'Friendly',
+  'Special Accommodations',
+  'Confrontational',
+  'Banned',
+  'Allergies',
+];
+
 const ClientList: React.FC = () => {
-  const { clients, setClients, loading, error, refreshClients } = useFetchClients(); // Now includes refreshClients
-  const { deleteClient, loading: deleteLoading, error: deleteError } = useDeleteClient(); // Use the delete hook
+  const [selectedTags, setSelectedTags] = useState<string[]>([]); // State for selected tags
+  const { clients, loading, error, refreshClients } = useFetchClients(selectedTags);
+  const { deleteClient, loading: deleteLoading, error: deleteError } = useDeleteClient();
   const [selectedClient, setSelectedClient] = useState<ClientDetails | null>(null);
   const [showViewModal, setShowViewModal] = useState(false);
 
@@ -27,18 +40,17 @@ const ClientList: React.FC = () => {
 
   // Handle deleting a client
   const handleDeleteClient = async (clientId: number) => {
-    const success = await deleteClient(clientId); // Call the deleteClient hook
+    const success = await deleteClient(clientId);
     if (success) {
-      setClients(clients.filter(client => client.clientid !== clientId)); // Update clients after deletion
-      closeModal(); // Close the modal after successful deletion
+      refreshClients(); // Refresh clients after deletion
+      closeModal();
     }
   };
 
   // Handle updating a client
-  const handleUpdateClient = (clientId: number, updatedClient: ClientDetails) => {
-    // Update the client in the state after successful update
-    setClients(clients.map(client => (client.clientid === clientId ? updatedClient : client)));
-    closeModal(); // Close the modal after updating the client
+  const handleUpdateClient = () => {
+    refreshClients(); // Refresh clients after updating
+    closeModal();
   };
 
   // Render loading or error states
@@ -47,8 +59,33 @@ const ClientList: React.FC = () => {
 
   return (
     <div className="client-log">
-      {/* Pass refreshClients to AddButton */}
       <AddButton refreshClients={refreshClients} />
+      
+      {/* Checkbox for filtering by tags */}
+      <div className="tag-filter">
+        <label>Filter by Tags:</label>
+        <div className="checkbox-group">
+          {availableTags.map(tag => (
+            <label key={tag}>
+              <input
+                type="checkbox"
+                value={tag}
+                checked={selectedTags.includes(tag)}
+                onChange={(e) => {
+                  const tagValue = e.target.value;
+                  if (e.target.checked) {
+                    setSelectedTags([...selectedTags, tagValue]);
+                  } else {
+                    setSelectedTags(selectedTags.filter(t => t !== tagValue));
+                  }
+                }}
+              />
+              {tag}
+            </label>
+          ))}
+        </div>
+      </div>
+
       <div className="table-header">
         <div className="header-cell">Name</div>
         <div className="header-cell">Email</div>
@@ -82,7 +119,7 @@ const ClientList: React.FC = () => {
           client={selectedClient}
           closeModal={closeModal}
           deleteClient={handleDeleteClient}
-          updateClient={handleUpdateClient} // Pass the update client handler
+          updateClient={handleUpdateClient}
         />
       )}
 

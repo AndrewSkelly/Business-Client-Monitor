@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { ClientDetails } from "../interfaces/Client";
 
-export const useFetchClients = () => {
+export const useFetchClients = (tags: string[] = []) => {
   const [clients, setClients] = useState<ClientDetails[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Function to fetch clients, now reusable
+  // Function to fetch clients with optional tags as query parameters
   const fetchClients = async () => {
+    setLoading(true); // Start loading state
     try {
-      // https://localhost:7053/api/Clients
-      const response = await fetch('https://business-client-monitor-api-e6d3axb9bzhwbhef.ukwest-01.azurewebsites.net/api/Clients');
+      // Construct the query string if there are selected tags
+      const query = tags.length > 0 ? `?tags=${tags.join(",")}` : '';
+      const response = await fetch(`https://business-client-monitor-api-e6d3axb9bzhwbhef.ukwest-01.azurewebsites.net/api/Clients${query}`);
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -23,10 +26,10 @@ export const useFetchClients = () => {
     }
   };
 
-  // Fetch clients on component mount
+  // Fetch clients on component mount or when tags change
   useEffect(() => {
     fetchClients();
-  }, []);
+  }, [tags]); // Trigger fetchClients whenever the tags change
 
   // Return the clients, setClients, loading, error, and a function to refresh clients
   return { clients, setClients, loading, error, refreshClients: fetchClients };
