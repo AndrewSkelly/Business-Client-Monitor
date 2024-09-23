@@ -1,0 +1,42 @@
+.Button-Container {
+    padding: .25rem;
+}
+
+.Button {
+    font-family: 'RubikBold', sans-serif;
+    font-size: .9rem;
+    margin: 0;
+    padding: .5rem 1.25rem;
+    color: white;
+    border: none;
+    border-radius: .3rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.Button-default {
+    background-color: #565656; // Red
+}
+
+.Button-primary {
+    background-color: #9600ff; // Blue
+    &:hover {
+        background-color: #7e4dc2;
+    }
+}
+
+.Button-delete {
+    background-color: #e74c3c;
+    
+    &:hover {
+        background-color: #c0392b;
+    }
+}
+
+.Button-success {
+    background-color: #28a745; // Green
+}
+
+.Button-warning {
+    background-color: #ffc107; // Yellow
+}

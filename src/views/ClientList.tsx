@@ -6,6 +6,7 @@ import ViewClientModal from '../components/ViewClientModal';
 import { ClientDetails } from '../interfaces/Client';
 import { useFetchClients } from '../hooks/useFetchClient'; // Hook for fetching clients
 import { useDeleteClient } from '../hooks/useDeleteClient'; // Hook for deleting clients
+import Button from '../components/Buttons/Button';
 
 // Define your available tags
 const availableTags = [
@@ -74,8 +75,10 @@ const ClientList: React.FC = () => {
                 onChange={(e) => {
                   const tagValue = e.target.value;
                   if (e.target.checked) {
+                    // Add the tag to the selectedTags array if checked
                     setSelectedTags([...selectedTags, tagValue]);
                   } else {
+                    // Remove the tag from selectedTags if unchecked
                     setSelectedTags(selectedTags.filter(t => t !== tagValue));
                   }
                 }}
@@ -104,9 +107,10 @@ const ClientList: React.FC = () => {
             <div className="client-cell client-tags">
               {client.tags ? <Tag text={client.tags} backgroundColor="#22bbdd" /> : 'No Tags'}
             </div>
-            <div className="client-cell client-actions">
+            {/* <div className="client-cell client-actions">
               <button className="edit-action" onClick={() => handleViewClient(client)}>View</button>
-            </div>
+            </div> */}
+            <Button variant={'primary'} label={'View'} onClick={() => handleViewClient(client)}></Button>
           </div>
         ))
       ) : (

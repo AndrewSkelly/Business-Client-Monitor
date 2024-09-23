@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ClientDetails } from '../interfaces/Client';
 import './ViewClientModal.scss';
+import Button from './Buttons/Button';
 
 interface ViewClientModalProps {
   client: ClientDetails;
@@ -21,7 +22,7 @@ const ViewClientModal: React.FC<ViewClientModalProps> = ({ client, closeModal, d
       [name]: value,
     }));
   };
-  
+
 
   const handleSave = async () => {
     setIsLoading(true);
@@ -130,24 +131,14 @@ const ViewClientModal: React.FC<ViewClientModalProps> = ({ client, closeModal, d
         <div className="modal-actions">
           {!isEditing ? (
             <>
-              <button className="edit-button" onClick={() => setIsEditing(true)}>
-                Edit
-              </button>
-              <button className="delete-button" onClick={handleDelete}>
-                Delete
-              </button>
-              <button className="close-button" onClick={closeModal}>
-                X
-              </button>
+              <Button variant={'primary'} label={'Edit'} onClick={() => setIsEditing(true)}></Button>
+              <Button variant={'delete'} label={'Delete'} onClick={handleDelete}></Button>
+              <Button variant={'delete'} label={'X'} onClick={closeModal}></Button>
             </>
           ) : (
             <>
-              <button className="save-button" onClick={handleSave} disabled={isLoading}>
-                {isLoading ? 'Saving...' : 'Save'}
-              </button>
-              <button className="cancel-button" onClick={() => setIsEditing(false)}>
-                Cancel
-              </button>
+              <Button variant={'primary'} label={isLoading ? 'Saving...' : 'Save'} onClick={handleSave} disabled={isLoading}></Button>
+              <Button variant={'delete'} label={'Cancel'} onClick={() => setIsEditing(false)}></Button>
             </>
           )}
         </div>

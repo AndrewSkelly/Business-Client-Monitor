@@ -2,12 +2,14 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faChartBar, faCog } from '@fortawesome/free-solid-svg-icons';
 import './Home.scss';
+import Button from '../components/Buttons/Button';
 
 const Home: React.FC = () => {
   return (
     <div className='home'>
       <h1 className='title'>Home Page</h1>
       <p className='text'>Welcome to the home page!</p>
+      <Button label={'View'} variant='primary'></Button>
       
       {/* Card Row */}
       <div className='card-row'>
