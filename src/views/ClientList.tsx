@@ -7,6 +7,7 @@ import { ClientDetails } from '../interfaces/Client';
 import { useFetchClients } from '../hooks/useFetchClient'; // Hook for fetching clients
 import { useDeleteClient } from '../hooks/useDeleteClient'; // Hook for deleting clients
 import Button from '../components/Buttons/Button';
+import TableHeader from '../components/Tables/TableHeader';
 
 // Define your available tags
 const availableTags = [
@@ -89,13 +90,7 @@ const ClientList: React.FC = () => {
         </div>
       </div>
 
-      <div className="table-header">
-        <div className="header-cell">Name</div>
-        <div className="header-cell">Email</div>
-        <div className="header-cell">Phone</div>
-        <div className="header-cell">Tags</div>
-        <div className="header-cell">Actions</div>
-      </div>
+      <TableHeader headers={["Full Name", "Email", "Phone", "Tags", "Actions"]}></TableHeader>
 
       {/* Render the list of clients */}
       {clients.length > 0 ? (

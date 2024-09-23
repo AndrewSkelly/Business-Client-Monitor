@@ -3,6 +3,7 @@ import React from 'react';
 import './ServiceHistory.scss';
 // import { ServiceHistoryDetails } from '../interfaces/ServiceHistory';
 import { useFetchServiceHistory } from '../hooks/useFetchServiceHistory'; // Hook for fetching service history
+import TableHeader from '../components/Tables/TableHeader';
 
 const ServiceHistory: React.FC = () => {
   const { serviceHistory, loading, error } = useFetchServiceHistory(); // Fetch service history data
@@ -11,13 +12,9 @@ const ServiceHistory: React.FC = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
+    
     <div className="service-history">
-      <div className="table-header">
-        <div className="header-cell">Client ID</div>
-        <div className="header-cell">Staff ID</div>
-        <div className="header-cell">Service Type</div>
-        <div className="header-cell">Service Date</div>
-      </div>
+      <TableHeader headers={["Client ID", "Staff ID", "Service Type", "Service Date"]}></TableHeader>
 
       {serviceHistory.length > 0 ? (
         serviceHistory.map(record => (

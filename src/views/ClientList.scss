@@ -12,30 +12,6 @@
         /* To handle overflow if needed */
     }
     
-    /* Table Header */
-    .table-header {
-        display: flex;
-        background-color: #f8f9fa;
-        font-weight: bold;
-        border-bottom: 2px solid #dee2e6;
-        padding: 10px;
-        margin-bottom: 10px;
-        /* Space below the header */
-    }
-    
-    .header-cell {
-        flex: 1;
-        padding: 10px;
-        text-align: left;
-        border-right: 1px solid #dee2e6;
-        color: #343a40;
-        /* Dark grey color for heading text */
-    }
-    
-    .header-cell:last-child {
-        border-right: none;
-    }
-    
     /* Client Row */
     .client-row {
         display: flex;
@@ -243,29 +219,6 @@
         /* To handle overflow if needed */
     }
     
-    /* Table Header */
-    .table-header {
-        display: flex;
-        background-color: #f8f9fa;
-        font-weight: bold;
-        border-bottom: 2px solid #dee2e6;
-        padding: 10px;
-        margin-bottom: 10px;
-        /* Space below the header */
-    }
-    
-    .header-cell {
-        flex: 1;
-        padding: 10px;
-        text-align: left;
-        border-right: 1px solid #dee2e6;
-        color: #343a40;
-        /* Dark grey color for heading text */
-    }
-    
-    .header-cell:last-child {
-        border-right: none;
-    }
     
     /* Client Row */
     .client-row {
