@@ -10,108 +10,114 @@ const Analytics: React.FC = () => {
   const chart4Ref = useRef<HTMLCanvasElement | null>(null);
   const chart5Ref = useRef<HTMLCanvasElement | null>(null);
 
-  // Variables to store chart instances (allowing undefined initially)
-  let chart1Instance: Chart | undefined;
-  let chart2Instance: Chart | undefined;
-  let chart3Instance: Chart | undefined;
-  let chart4Instance: Chart | undefined;
-  let chart5Instance: Chart | undefined;
+  // Array to store chart instances
+  let chartInstances: Chart[] = [];
 
-  // Function to create a sample chart
-  const createChart = (chartRef: React.RefObject<HTMLCanvasElement>, chartId: string): Chart | undefined => {
+  // Sample data for each chart
+  const chartData = [
+    {
+      type: 'pie',
+      labels: ['Banned', 'Late', 'Allergies'],
+      data: [15, 20, 65],
+      colors: ['#9600ff', '#ff66ff', '#ff66cc'],
+    },
+    {
+      type: 'bar',
+      labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      data: [10, 20, 15, 25, 30],
+      colors: ['#4BC0C0', '#FF6384', '#FF9F40', '#FFCD56', '#36A2EB'],
+    },
+    {
+      type: 'bar',
+      labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+      data: [50, 75, 100, 125],
+      colors: ['#FF9F40', '#4BC0C0', '#36A2EB', '#FF6384'],
+    },
+    {
+      type: 'bar',
+      labels: ['New York', 'London', 'Tokyo', 'Sydney'],
+      data: [80, 60, 70, 50],
+      colors: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+    },
+    {
+      type: 'bar',
+      labels: ['North', 'South', 'East', 'West'],
+      data: [20, 35, 25, 15],
+      colors: ['#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0'],
+    },
+  ];
+
+  // Function to create charts dynamically based on chartData
+  const createChart = (chartRef: React.RefObject<HTMLCanvasElement>, chartConfig: any): Chart | undefined => {
     if (!chartRef.current) {
-      console.error(`Canvas ref for ${chartId} is null!`);
       return undefined;
     }
 
-    try {
-      return new Chart(chartRef.current, {
-        type: 'bar', // Bar chart type
-        data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-          datasets: [
-            {
-              label: 'Sample Data',
-              data: [12, 19, 3, 5, 2, 3],
-              backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-              ],
-              borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-              ],
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
+    const chartInstance = new Chart(chartRef.current, {
+      type: chartConfig.type, // Chart type (e.g., 'bar' or 'pie')
+      data: {
+        labels: chartConfig.labels,
+        datasets: [
+          {
+            data: chartConfig.data,
+            backgroundColor: chartConfig.colors,
+            borderColor: chartConfig.colors.map((color: string) => color),
+            borderWidth: 1,
           },
-        },
-      });
-    } catch (error) {
-      console.error(`Error creating chart for ${chartId}:`, error);
-      return undefined;
-    }
+        ],
+      },
+      options: {
+        responsive: true,
+        scales: chartConfig.type === 'bar' ? {
+          y: {
+            beginAtZero: true,
+          },
+        } : undefined,
+      },
+    });
+
+    chartInstances.push(chartInstance); // Store the chart instance
+    return chartInstance;
   };
 
-  // Initialize charts when component mounts
+  // Initialize charts when the component mounts
   useEffect(() => {
-    console.log('Initializing charts...');
-    chart1Instance = createChart(chart1Ref, 'chart1');
-    chart2Instance = createChart(chart2Ref, 'chart2');
-    chart3Instance = createChart(chart3Ref, 'chart3');
-    chart4Instance = createChart(chart4Ref, 'chart4');
-    chart5Instance = createChart(chart5Ref, 'chart5');
+    createChart(chart1Ref, chartData[0]);
+    createChart(chart2Ref, chartData[1]);
+    createChart(chart3Ref, chartData[2]);
+    createChart(chart4Ref, chartData[3]);
+    createChart(chart5Ref, chartData[4]);
 
     // Cleanup function to destroy charts when the component unmounts
     return () => {
-      if (chart1Instance) chart1Instance.destroy();
-      if (chart2Instance) chart2Instance.destroy();
-      if (chart3Instance) chart3Instance.destroy();
-      if (chart4Instance) chart4Instance.destroy();
-      if (chart5Instance) chart5Instance.destroy();
+      chartInstances.forEach((instance) => instance.destroy()); // Destroy all chart instances
     };
   }, []);
 
   return (
-    <div className='clientlog'>
-      <h1 className='title'>Analytics Page</h1>
-      <p className='text'>This is where analytics data will be displayed including customer, service, staff and payment analytics</p>
-      <p className='text'>This is a work in progress!</p>
+    <div className="analytics-container">
+      <h1 className="title">Analytics Page</h1>
+      <p className="text">This is where analytics data will be displayed, including customer, service, staff, and payment analytics.</p>
       
       {/* Row with 3 charts */}
-      <div className='chart-row'>
-        <div className='chart-container'>
-          <canvas ref={chart1Ref}></canvas>
+      <div className="chart-row">
+        <div className="chart-container">
+          <canvas ref={chart1Ref}></canvas> {/* Pie chart */}
         </div>
-        <div className='chart-container'>
+        <div className="chart-container">
           <canvas ref={chart2Ref}></canvas>
         </div>
-        <div className='chart-container'>
+        <div className="chart-container">
           <canvas ref={chart3Ref}></canvas>
         </div>
       </div>
 
       {/* Row with 2 charts */}
-      <div className='chart-row'>
-        <div className='chart-container'>
+      <div className="chart-row">
+        <div className="chart-container">
           <canvas ref={chart4Ref}></canvas>
         </div>
-        <div className='chart-container'>
+        <div className="chart-container">
           <canvas ref={chart5Ref}></canvas>
         </div>
       </div>

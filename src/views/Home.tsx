@@ -6,9 +6,12 @@ import './Home.scss';
 const Home: React.FC = () => {
   return (
     <div className='home'>
-      <h1 className='title'>Home Page</h1>
-      <p className='text'>Welcome to the home page!</p>
-      
+
+      {/* Big Card */}
+      <div className='big-card'>
+        <h1 className='title'>Home Page</h1>
+      </div>
+
       {/* Card Row */}
       <div className='card-row'>
         <div className='card'>

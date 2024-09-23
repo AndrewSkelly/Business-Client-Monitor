@@ -1,44 +1,31 @@
-.clientlog {
-    padding: 20px;
+.analytics-container {
+    background-color: #ffffff; /* Light grey background */
+    width: 100%;
+  }
   
-    .title {
-      font-size: 2em;
-      margin-bottom: 20px;
-      color: #000; /* Updated color */
-    }
+  .title {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
   
-    .text {
-      margin-bottom: 20px;
-      font-size: 1.2em;
-      color: #000; /* Updated color */
-    }
+  .text {
+    text-align: center;
+    margin-bottom: 20px;
+  }
   
-    .chart-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 30px;
+  .chart-row {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem;
+  }
   
-      /* Style for each chart container */
-      .chart-container {
-        flex: 1;
-        margin: 0 10px; /* Space between charts */
-        padding: 10px;
-        background-color: #534b5e;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  
-        /* Ensure the canvas element takes up full space */
-        canvas {
-          width: 100%;
-          height: 300px; /* Set a fixed height for the canvas */
-        }
-      }
-    }
-  
-    /* Handle the second row which has only two charts */
-    .chart-row:nth-child(2) .chart-container {
-      flex-basis: 100%; /* Each chart takes up 45% width */
-    }
+  .chart-container {
+    padding: 0;
+    width: 100%;
+    margin: 1rem;
+    background-color: white; /* White background for charts */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   

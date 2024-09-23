@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';  // Import NavLink from react-router-dom
 import './Navbar.scss';
 import Logo from '../assets/icons/ClientLogLogo.png';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCalendarDays, faChartSimple, faHouse, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarDays, faChartSimple, faHouse, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar: React.FC = () => {
-  // State to control whether the navbar is open or closed
-  const [isOpen, setIsOpen] = useState(false); // Default to false, meaning the navbar is closed initially
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Detect if the screen is mobile-sized
+  const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  // Function to toggle navbar visibility
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
 
-  // Update the isMobile state when the window is resized
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -24,10 +21,7 @@ const Navbar: React.FC = () => {
       }
     };
 
-    // Add event listener for window resize
     window.addEventListener('resize', handleResize);
-
-    // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -35,7 +29,6 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      {/* Hamburger icon, only shown on mobile when the navbar is closed */}
       {!isOpen && isMobile && (
         <div className="hamburger" onClick={toggleNavbar}>
           <span className="bar"></span>
@@ -44,59 +37,48 @@ const Navbar: React.FC = () => {
         </div>
       )}
 
-      {/* Navbar that appears when isOpen is true or it's not mobile */}
-      {(isOpen && !isMobile) && (
-        <nav className="navbar">
-          <ul className="nav-list">
-            <li className="nav-logo">
-              <img src={Logo} alt="Logo" />
-            </li>
-            {/* Close icon, only shown on mobile */}
-            {isMobile && (
-              <li className="nav-close" onClick={toggleNavbar}>
-                X
-              </li>
-            )}
-            <li className="nav-item" onClick={toggleNavbar}>
-              <Link to="/" className="nav-link">Home</Link>
-            </li>
-            <li className="nav-item" onClick={toggleNavbar}>
-              <Link to="/client-log" className="nav-link">Client List</Link>
-            </li>
-            <li className="nav-item" onClick={toggleNavbar}>
-              <Link to="/service-history" className="nav-link">Service History</Link>
-            </li>
-            <li className="nav-item" onClick={toggleNavbar}>
-              <Link to="/analytics" className="nav-link">Analytics</Link>
-            </li>
-          </ul>
-        </nav>
-      )}
-
-      {/* Navbar that appears when isOpen is true or it's not mobile */}
       {(isOpen || !isMobile) && (
         <nav className="navbar">
           <ul className="nav-list">
             <li className="nav-logo">
               <img src={Logo} alt="Logo" />
             </li>
-            {/* Close icon, only shown on mobile */}
             {isMobile && (
               <li className="nav-close" onClick={toggleNavbar}>
                 X
               </li>
             )}
             <li className="nav-item" onClick={toggleNavbar}>
-              <Link to="/" className="nav-link"><FontAwesomeIcon className='nav-icon' icon={faHouse} />Home</Link>
+              <NavLink
+                to="/"
+                className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+              >
+                <FontAwesomeIcon className="nav-icon" icon={faHouse} />Home
+              </NavLink>
             </li>
             <li className="nav-item" onClick={toggleNavbar}>
-              <Link to="/client-log" className="nav-link"><FontAwesomeIcon className='nav-icon' icon={faUsers} />Client List</Link>
+              <NavLink
+                to="/client-log"
+                className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+              >
+                <FontAwesomeIcon className="nav-icon" icon={faUsers} />Client List
+              </NavLink>
             </li>
             <li className="nav-item" onClick={toggleNavbar}>
-              <Link to="/service-history" className="nav-link"><FontAwesomeIcon className='nav-icon' icon={faCalendarDays} />Service History</Link>
+              <NavLink
+                to="/service-history"
+                className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+              >
+                <FontAwesomeIcon className="nav-icon" icon={faCalendarDays} />Service History
+              </NavLink>
             </li>
             <li className="nav-item" onClick={toggleNavbar}>
-              <Link to="/analytics" className="nav-link"><FontAwesomeIcon className='nav-icon' icon={faChartSimple} />Analytics</Link>
+              <NavLink
+                to="/analytics"
+                className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+              >
+                <FontAwesomeIcon className="nav-icon" icon={faChartSimple} />Analytics
+              </NavLink>
             </li>
           </ul>
         </nav>

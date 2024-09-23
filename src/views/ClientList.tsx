@@ -103,9 +103,6 @@ const ClientList: React.FC = () => {
             <div className="client-cell client-tags">
               {client.tags ? <Tag text={client.tags} backgroundColor="#22bbdd" /> : 'No Tags'}
             </div>
-            {/* <div className="client-cell client-actions">
-              <button className="edit-action" onClick={() => handleViewClient(client)}>View</button>
-            </div> */}
             <Button variant={'primary'} label={'View'} onClick={() => handleViewClient(client)}></Button>
           </div>
         ))
