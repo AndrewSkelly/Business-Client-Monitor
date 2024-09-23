@@ -8,7 +8,7 @@ import { useFetchClients } from '../hooks/useFetchClient'; // Hook for fetching 
 import { useDeleteClient } from '../hooks/useDeleteClient'; // Hook for deleting clients
 import Button from '../components/Buttons/Button';
 import TableHeader from '../components/Tables/TableHeader';
-import { faCalendarDays, faCircleCheck, faEnvelope, faFilePen, faMailBulk, faMailReply, faMessage, faMobile, faPhone, faTag, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faFilePen, faPhone, faTag, faUser } from '@fortawesome/free-solid-svg-icons'
 
 // Define your available tags
 const availableTags = [
