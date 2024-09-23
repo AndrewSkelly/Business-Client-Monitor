@@ -8,6 +8,7 @@ import { useFetchClients } from '../hooks/useFetchClient'; // Hook for fetching 
 import { useDeleteClient } from '../hooks/useDeleteClient'; // Hook for deleting clients
 import Button from '../components/Buttons/Button';
 import TableHeader from '../components/Tables/TableHeader';
+import { faCalendarDays, faCircleCheck, faEnvelope, faFilePen, faMailBulk, faMailReply, faMessage, faMobile, faPhone, faTag, faUser } from '@fortawesome/free-solid-svg-icons'
 
 // Define your available tags
 const availableTags = [
@@ -90,7 +91,7 @@ const ClientList: React.FC = () => {
         </div>
       </div>
 
-      <TableHeader headers={["Full Name", "Email", "Phone", "Tags", "Actions"]}></TableHeader>
+      <TableHeader headers={["Full Name", "Email", "Phone", "Tags", "Actions"]} icons={[faUser, faEnvelope, faPhone, faTag, faFilePen]}></TableHeader>
 
       {/* Render the list of clients */}
       {clients.length > 0 ? (

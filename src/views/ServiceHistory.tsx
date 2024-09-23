@@ -4,6 +4,7 @@ import './ServiceHistory.scss';
 // import { ServiceHistoryDetails } from '../interfaces/ServiceHistory';
 import { useFetchServiceHistory } from '../hooks/useFetchServiceHistory'; // Hook for fetching service history
 import TableHeader from '../components/Tables/TableHeader';
+import { faBellConcierge, faBuildingUser, faClock, faUser } from '@fortawesome/free-solid-svg-icons';
 
 const ServiceHistory: React.FC = () => {
   const { serviceHistory, loading, error } = useFetchServiceHistory(); // Fetch service history data
@@ -14,7 +15,7 @@ const ServiceHistory: React.FC = () => {
   return (
     
     <div className="service-history">
-      <TableHeader headers={["Client ID", "Staff ID", "Service Type", "Service Date"]}></TableHeader>
+      <TableHeader headers={["Client ID", "Staff ID", "Service Type", "Service Date"]} icons={[faUser, faBuildingUser, faBellConcierge, faClock]}></TableHeader>
 
       {serviceHistory.length > 0 ? (
         serviceHistory.map(record => (
