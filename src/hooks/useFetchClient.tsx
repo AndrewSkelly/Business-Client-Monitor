@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { ClientDetails } from "../interfaces/Client";
 
 export const useFetchClients = (tags: string[] = []) => {
@@ -6,31 +6,33 @@ export const useFetchClients = (tags: string[] = []) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Function to fetch clients with optional tags as query parameters
-  const fetchClients = async () => {
+  // Memoize fetchClients to avoid recreating it unnecessarily on each render
+  const fetchClients = useCallback(async () => {
     setLoading(true); // Start loading state
     try {
       // Construct the query string if there are selected tags
-      const query = tags.length > 0 ? `?tags=${tags.join(",")}` : '';
+      const query = tags.length > 0 ? `?${tags.map(tag => `tags=${encodeURIComponent(tag)}`).join("&")}` : '';
       const response = await fetch(`https://business-client-monitor-api-e6d3axb9bzhwbhef.ukwest-01.azurewebsites.net/api/Clients${query}`);
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
+
       const data: ClientDetails[] = await response.json();
-      setClients(data);
+      setClients(data); // Update the state with fetched clients
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'Unknown error occurred');
+      // Handle errors and set error message
+      setError((error instanceof Error) ? error.message : 'Unknown error occurred');
     } finally {
-      setLoading(false);
+      setLoading(false); // Ensure loading is stopped even after an error
     }
-  };
+  }, [tags]);
 
-  // Fetch clients on component mount or when tags change
+  // Fetch clients when component mounts or tags change
   useEffect(() => {
-    fetchClients();
-  }, [tags]); // Trigger fetchClients whenever the tags change
+    fetchClients(); // Call the function on mount or tag change
+  }, [fetchClients]);
 
-  // Return the clients, setClients, loading, error, and a function to refresh clients
+  // Return the clients, loading, error, and a function to refresh clients
   return { clients, setClients, loading, error, refreshClients: fetchClients };
 };
