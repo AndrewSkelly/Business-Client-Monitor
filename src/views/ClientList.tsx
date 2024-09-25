@@ -8,7 +8,8 @@ import { useFetchClients } from '../hooks/useFetchClient'; // Hook for fetching 
 import { useDeleteClient } from '../hooks/useDeleteClient'; // Hook for deleting clients
 import Button from '../components/Buttons/Button';
 import TableHeader from '../components/Tables/TableHeader';
-import { faEnvelope, faFilePen, faPhone, faTag, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faCheckCircle, faCheckDouble, faCheckSquare, faEnvelope, faFilePen, faPhone, faTag, faUser, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Define your available tags
 const availableTags = [
@@ -66,30 +67,30 @@ const ClientList: React.FC = () => {
       
       {/* Checkbox for filtering by tags */}
       <div className="tag-filter">
-        <label>Filter by Tags:</label>
-        <div className="checkbox-group">
-          {availableTags.map(tag => (
-            <label key={tag}>
-              <input
-                type="checkbox"
-                value={tag}
-                checked={selectedTags.includes(tag)}
-                onChange={(e) => {
-                  const tagValue = e.target.value;
-                  if (e.target.checked) {
-                    // Add the tag to the selectedTags array if checked
-                    setSelectedTags([...selectedTags, tagValue]);
-                  } else {
-                    // Remove the tag from selectedTags if unchecked
-                    setSelectedTags(selectedTags.filter(t => t !== tagValue));
-                  }
-                }}
-              />
-              {tag}
-            </label>
-          ))}
-        </div>
-      </div>
+  <label>Filter by Tags:</label>
+  <div className="checkbox-group">
+    {availableTags.map(tag => (
+      <label key={tag}>
+        <input
+          type="checkbox"
+          value={tag}
+          checked={selectedTags.includes(tag)}
+          onChange={(e) => {
+            const tagValue = e.target.value;
+            if (e.target.checked) {
+              setSelectedTags([...selectedTags, tagValue]);
+            } else {
+              setSelectedTags(selectedTags.filter(t => t !== tagValue));
+            }
+          }}
+        />
+        <span className="custom-checkbox"><FontAwesomeIcon className="card-icon" icon={faCheck} /></span>
+        {tag}
+      </label>
+    ))}
+  </div>
+</div>
+
 
       <TableHeader headers={["Full Name", "Email", "Phone", "Tags", "Actions"]} icons={[faUser, faEnvelope, faPhone, faTag, faFilePen]}></TableHeader>
 
