@@ -10,6 +10,7 @@ import Button from '../components/Buttons/Button';
 import TableHeader from '../components/Tables/TableHeader';
 import { faCheck, faEnvelope, faFilePen, faMagnifyingGlass, faPhone, faTag, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import NoData from '../components/NoData';
 
 // Define your available tags
 const availableTags = [
@@ -108,7 +109,7 @@ const ClientList: React.FC = () => {
           </div>
         ))
       ) : (
-        <div>No clients available</div>
+        <NoData></NoData>
       )}
 
       {/* Conditionally render the modal if a client is selected */}
