@@ -1,3 +1,8 @@
+.button-wrap {
+  display: flex;
+  align-items: center;
+}
+
 .add-button {
     width: 50px;
     height: 50px;
@@ -11,6 +16,13 @@
     color: white;
     font-size: 24px;
     font-weight: bold;
+  }
+
+  .text-button {
+    padding-left: 1%;
+    font-family: 'RubikBold', sans-serif;
+    font-size: larger;
+    color: #9900ff;
   }
   
   .add-button:hover {

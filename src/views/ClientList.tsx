@@ -8,7 +8,7 @@ import { useFetchClients } from '../hooks/useFetchClient'; // Hook for fetching 
 import { useDeleteClient } from '../hooks/useDeleteClient'; // Hook for deleting clients
 import Button from '../components/Buttons/Button';
 import TableHeader from '../components/Tables/TableHeader';
-import { faCheck, faCheckCircle, faCheckDouble, faCheckSquare, faEnvelope, faFilePen, faPhone, faTag, faUser, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faCheckCircle, faCheckDouble, faCheckSquare, faEnvelope, faFilePen, faFilter, faMagnifyingGlass, faPhone, faTag, faUser, faUsers } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Define your available tags
@@ -67,7 +67,7 @@ const ClientList: React.FC = () => {
       
       {/* Checkbox for filtering by tags */}
       <div className="tag-filter">
-  <label>Filter by Tags:</label>
+  <label><FontAwesomeIcon className="filter-icon" icon={faMagnifyingGlass} />Filter by Tags:</label>
   <div className="checkbox-group">
     {availableTags.map(tag => (
       <label key={tag}>

@@ -72,9 +72,13 @@ const AddButton: React.FC<AddButtonProps> = ({ refreshClients }) => {
 
   return (
     <>
+    <div className='button-wrap'>
       <button className="add-button" onClick={toggleModal}>
         <span className="plus">+</span>
       </button>
+      <h1 className="text-button">Add a Client</h1>
+      </div>
+
 
       {showModal && (
         <div className="modal">
