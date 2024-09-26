@@ -8,7 +8,7 @@ import { useFetchClients } from '../hooks/useFetchClient'; // Hook for fetching 
 import { useDeleteClient } from '../hooks/useDeleteClient'; // Hook for deleting clients
 import Button from '../components/Buttons/Button';
 import TableHeader from '../components/Tables/TableHeader';
-import { faCheck, faCheckCircle, faCheckDouble, faCheckSquare, faEnvelope, faFilePen, faFilter, faMagnifyingGlass, faPhone, faTag, faUser, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faEnvelope, faFilePen, faMagnifyingGlass, faPhone, faTag, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // Define your available tags
