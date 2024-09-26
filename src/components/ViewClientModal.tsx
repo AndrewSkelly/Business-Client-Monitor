@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
 import { ClientDetails } from '../interfaces/Client';
+import { ViewClientModalProps } from '../interfaces/ViewClientModalProps';
 import './ViewClientModal.scss';
 import Button from './Buttons/Button';
-
-interface ViewClientModalProps {
-  client: ClientDetails;
-  closeModal: () => void;
-  deleteClient: (clientId: number) => void;
-  updateClient: (clientId: number, updatedClient: ClientDetails) => void;
-}
 
 const ViewClientModal: React.FC<ViewClientModalProps> = ({ client, closeModal, deleteClient, updateClient }) => {
   const [isEditing, setIsEditing] = useState(false);
