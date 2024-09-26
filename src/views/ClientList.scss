@@ -219,31 +219,35 @@
         padding: 20px;
         background-color: #ffffff;
         border-radius: 8px;
-        // overflow-x: auto;
-        /* To handle overflow if needed */
     }
 
 
-    /* Client Row */
-    .client-row {
-        display: flex;
-        align-items: center;
-        border-bottom: 1px solid #dee2e6;
-        padding-top: .3rem;
-        padding-bottom: .3rem;
-    }
+/* Client Row */
+.client-row {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #dee2e6;
+    padding: 10px 0; /* Make padding consistent with header */
+}
 
-    .client-cell {
-        flex: 1;
-        text-align: left;
-        color: #343a40;
-        /* Dark grey color for cell text */
-    }
+.client-cell {
+    flex: 1;
+    justify-content: space-between;
+    text-align: left;
+    padding: 10px; /* Same padding for data cells */
+    color: #343a40;
+    display: flex; /* Align content inside flex */
+    align-items: center; /* Ensure data is vertically centered */
+}
 
-    /* Hover effect for rows */
-    .client-row:hover {
-        background-color: #e9ecef;
-    }
+.client-cell:last-child {
+    border-right: none;
+}
+
+/* Hover effect for rows */
+.client-row:hover {
+    background-color: #e9ecef;
+}
 
     .card-loading {
         position: relative;

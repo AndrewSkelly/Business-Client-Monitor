@@ -4,18 +4,19 @@
         background-color: #f8f9fa;
         font-weight: bold;
         border-bottom: 2px solid #dee2e6;
-        padding: 10px;
+        padding: 10px 0; /* Make padding equal in header and row */
         margin-bottom: 10px;
-        /* Space below the header */
+        align-items: center; /* Ensure icons and text are aligned */
     }
     
     .header-cell {
         flex: 1;
-        padding: 10px;
+        padding: 10px; /* Same padding for header cells as data cells */
         text-align: left;
         border-right: 1px solid #dee2e6;
         color: #343a40;
-        /* Dark grey color for heading text */
+        display: flex; /* Align content inside flex */
+        align-items: center; /* Vertically center icons and text */
     }
     
     .header-cell:last-child {
